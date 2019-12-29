@@ -5,6 +5,7 @@
 # intitialize the current directory of the java files
 CURDIR="./"
 
+
 # ANSI values for coloring the output
 PURPLE="\033[0;35m"
 GREEN="\033[0;32m"
