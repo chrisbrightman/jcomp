@@ -1,0 +1,8 @@
+.commitlogs
+.previous/
+.git-setup-conf
+.commiterr
+out/
+*.exe
+*.o
+test/
