@@ -26,7 +26,8 @@ function singlelevel_compile {
 		if [ $CURDIR/$FILE -nt ./out/${FILE%.java}.class ] || [ "$1" = "1" ] || [ ! -e ./out/${FILE%.java}.class ]; then
 			for DEPENDANCY in $(../src/get-dependancies $CURDIR/$FILE) 
 			do
-				if [ $DEPENDANCY -nt ./out${DEPENDANCY#./src} ] || [ ! -e ./out${DEPENDANCY#./src} ]; then
+				OUT="./out${DEPENDANCY#./src}"
+				if [ $DEPENDANCY -nt ${OUT%.java}.class ] || [ ! -e ${OUT%.java}.class ]; then
 					echo -e "${PURPLE} Compiling $DEPENDANCY ${NOCOLOR}"
 					javac $JAVAFLAGS -classpath ./out $DEPENDANCY -d ./out/	
 				fi
@@ -45,13 +46,20 @@ function multilevel_compile {
 		if [ $CURDIR/$1$FILE -nt ./out/$1${FILE%.java}.class ] || [ "$2"  = "1" ] || [ ! -e ./out/$1${FILE%.java}.class ]; then
 			for DEPENDANCY in $(../src/get-dependancies $CURDIR/$1$FILE) 
 			do
-				if [ $DEPENDANCY -nt ./out${DEPENDANCY#./src} ] || [ ! -e ./out${DEPENDANCY#./src} ]; then
+				OUT="./out${DEPENDANCY#./src}"
+				if [ $DEPENDANCY -nt ${OUT%.java}.class ] || [ ! -e ${OUT%.java}.class ]; then
 					echo -e "${PURPLE} Compiling $DEPENDANCY ${NOCOLOR}"
 					javac $JAVAFLAGS -classpath ./out $DEPENDANCY -d ./out/	
 				fi
 			done
 			echo -e "${PURPLE} Compiling $CURDIR/$1$FILE ${NOCOLOR}"
 			javac $JAVAFLAGS -classpath ./out $CURDIR/$1$FILE -d ./out/ 
+		fi
+	done
+	for FILE in $(ls $CURDIR/$1 | grep -v .java)
+	do 
+		if [ -d $CURDIR/$1$FILE ]; then 
+			multilevel_compile $1$FILE/ $2
 		fi
 	done
 }
