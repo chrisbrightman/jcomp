@@ -3,6 +3,7 @@
 .git-setup-conf
 .commiterr
 out/
+bin/
 *.exe
 *.o
 test/

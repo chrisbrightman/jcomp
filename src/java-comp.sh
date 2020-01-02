@@ -24,7 +24,7 @@ function singlelevel_compile {
 	for FILE in $(ls $CURDIR | grep .java) 
 	do
 		if [ $CURDIR/$FILE -nt ./out/${FILE%.java}.class ] || [ "$1" = "1" ] || [ ! -e ./out/${FILE%.java}.class ]; then
-			for DEPENDANCY in $(../src/get-dependancies $CURDIR/$FILE) 
+			for DEPENDANCY in $(../bin/get-dependancies $CURDIR/$FILE) 
 			do
 				OUT="./out${DEPENDANCY#./src}"
 				if [ $DEPENDANCY -nt ${OUT%.java}.class ] || [ ! -e ${OUT%.java}.class ]; then
@@ -44,7 +44,7 @@ function multilevel_compile {
 	for FILE in $(ls $CURDIR/$1 | grep .java) 
 	do
 		if [ $CURDIR/$1$FILE -nt ./out/$1${FILE%.java}.class ] || [ "$2"  = "1" ] || [ ! -e ./out/$1${FILE%.java}.class ]; then
-			for DEPENDANCY in $(../src/get-dependancies $CURDIR/$1$FILE) 
+			for DEPENDANCY in $(../bin/get-dependancies $CURDIR/$1$FILE) 
 			do
 				OUT="./out${DEPENDANCY#./src}"
 				if [ $DEPENDANCY -nt ${OUT%.java}.class ] || [ ! -e ${OUT%.java}.class ]; then
