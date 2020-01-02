@@ -1,0 +1,18 @@
+this is a very simple autmated java project compiler writen 
+perdominitly in bash scripting
+
+-compiles all .java files in a directory or in an src foulder and
+ puts them into an out directory
+
+-does currently support packages and subpackages
+
+-also supports a cofig file called jcomp.conf which contains the dependancies of 
+ java files
+
+Recomended Setup:
+
+	* compile the get-dependancies.c into a executable called get-dependacies 
+	* make the jcomp file executable (standard method: chmod +x ./jcomp)
+	* put the get-dependancies file and the jcomp file into a directory that
+	  is in your path
+	* the jcomp.conf file is optional but there will be no dependancy checking done
