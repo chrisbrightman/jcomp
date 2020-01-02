@@ -1,5 +1,7 @@
 this is a very simple autmated java project compiler writen 
 perdominitly in bash scripting
+this project was perdominatly impromptu and really so that I could learn more
+about bash scripting
 
 -compiles all .java files in a directory or in an src foulder and
  puts them into an out directory
